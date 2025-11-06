@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbie Collection - Dream. Create. Inspire.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffc2d6, #ffafcc, #ffc8dd);
+            color: #8a2d5e;
+            min-height: 100vh;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #ff5c8d, #ff97b7, #ffc2d6);
+            box-shadow: 0 4px 20px rgba(219, 39, 119, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 36px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 5%;
+            text-align: center;
+            background: linear-gradient(rgba(255, 92, 141, 0.7), rgba(255, 151, 183, 0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><rect width="1200" height="600" fill="%23ff97b7"/><circle cx="200" cy="150" r="80" fill="%23ff5c8d" opacity="0.3"/><circle cx="1000" cy="100" r="120" fill="%23ffc2d6" opacity="0.4"/><circle cx="800" cy="400" r="100" fill="%23ffafcc" opacity="0.3"/><circle cx="300" cy="450" r="90" fill="%23ff5c8d" opacity="0.2"/></svg>');
+            background-size: cover;
+            position: relative;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: white;
+            color: #ff5c8d;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Collection Section */
+        .collection-section {
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #8a2d5e;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #ff5c8d, #ff97b7);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #ff97b7;
+            border-radius: 30px;
+            color: #8a2d5e;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: #ff5c8d;
+            color: white;
+            border-color: #ff5c8d;
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .collection-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .collection-item.hidden {
+            display: none;
+        }
+        
+        .collection-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .item-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(45deg, #ffc2d6, #ffafcc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8a2d5e;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .item-info {
+            padding: 20px;
+        }
+        
+        .item-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #8a2d5e;
+        }
+        
+        .item-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .item-price {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ff5c8d;
+        }
+        
+        .item-year {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 80px 5%;
+            background: linear-gradient(to right, #ffafcc, #ffc2d6);
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-content h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #8a2d5e;
+        }
+        
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #7c2d69;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #8a2d5e, #a8376f);
+            color: white;
+            padding: 50px 5% 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #ff97b7;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ffc2d6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #ff97b7;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffc2d6;
+            font-size: 14px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #8a2d5e;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-crown"></i>
+                Barbie Collection
+            </a>
+            <nav class="nav-links">
+                <a href="#" class="nav-link" data-tab="home">Home</a>
+                <a href="#" class="nav-link" data-tab="collection">Collection</a>
+                <a href="#" class="nav-link" data-tab="dolls">Dolls</a>
+                <a href="#" class="nav-link" data-tab="accessories">Accessories</a>
+                <a href="#" class="nav-link" data-tab="about">About</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover the Magic of Barbie</h1>
+            <p>Explore our exclusive collection of vintage and modern Barbie dolls, accessories, and playsets.</p>
+            <button class="btn" id="viewCollectionBtn">View Collection</button>
+        </div>
+    </section>
+    
+    <!-- Collection Section -->
+    <section class="collection-section">
+        <h2 class="section-title">Featured Collection</h2>
+        
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="vintage">Vintage</button>
+            <button class="filter-btn" data-filter="modern">Modern</button>
+            <button class="filter-btn" data-filter="fashion">Fashion</button>
+            <button class="filter-btn" data-filter="career">Career</button>
+            <button class="filter-btn" data-filter="dreamhouse">Dreamhouse</button>
+        </div>
+        
+        <div class="collection-grid">
+            <!-- Item 1 -->
+            <div class="collection-item" data-category="vintage">
+                <div class="item-image">
+                    <div>1959 Original Barbie</div>
+                </div>
+                <div class="item-info">
+                    <h3 class="item-title">1959 Original Barbie</h3>
+                    <p class="item-description">The very first Barbie doll released in 1959 with black and white swimsuit.</p>
+                    <div class="item-meta">
+                        <span class="item-price">$299.99</span>
+                        <span class="item-year">1959</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="collection-item" data-category="modern career">
+                <div class="item-image">
+                    <div>Astronaut Barbie</div>
+                </div>
+                <div class="item-info">
+                    <h3 class="item-title">Astronaut Barbie</h3>
+                    <p class="item-description">Inspiring girls to reach for the stars with this space exploration set.</p>
+                    <div class="item-meta">
+                        <span class="item-price">$49.99</span>
+                        <span class="item-year">2021</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="collection-item" data-category="dreamhouse">
+                <div class="item-image">
+                    <div>Barbie Dreamhouse</div>
+                </div>
+                <div class="item-info">
+                    <h3 class="item-title">Barbie Dreamhouse</h3>
+                    <p class="item-description">Three-story dreamhouse with elevator, pool, and working lights.</p>
+                    <div class="item-meta">
+                        <span class="item-price">$199.99</span>
+                        <span class="item-year">2022</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 4 -->
+            <div class="collection-item" data-category="fashion modern">
+                <div class="item-image">
+                    <div>Fashionista Collection</div>
+                </div>
+                <div class="item-info">
+                    <h3 class="item-title">Fashionista Collection</h3>
+                    <p class="item-description">Diverse dolls with various body types, skin tones, and disabilities.</p>
+                    <div class="item-meta">
+                        <span class="item-price">$24.99</span>
+                        <span class="item-year">2023</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 5 -->
+            <div class="collection-item" data-category="vintage">
+                <div class="item-image">
+                    <div>Vintage Barbie Corvette</div>
+                </div>
+                <div class="item-info">
+                    <h3 class="item-title">Vintage Barbie Corvette</h3>
+                    <p class="item-description">Classic pink Corvette from the 1960s in excellent condition.</p>
+                    <div class="item-meta">
+                        <span class="item-price">$89.99</span>
+                        <span class="item-year">1962</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 6 -->
+            <div class="collection-item" data-category="career modern">
+                <div class="item-image">
+                    <div>Doctor Barbie</div>
+                </div>
+                <div class="item-info">
+                    <h3 class="item-title">Doctor Barbie</h3>
+                    <p class="item-description">Inspiring future medical professionals with this career doll.</p>
+                    <div class="item-meta">
+                        <span class="item-price">$29.99</span>
+                        <span class="item-year">2020</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <h2>About Our Collection</h2>
+            <p>Since 1959, Barbie has been inspiring girls to dream big and imagine endless possibilities. Our collection celebrates the evolution of this iconic doll through the decades.</p>
+            <p>From vintage treasures to modern innovations, each piece in our collection tells a story of fashion, empowerment, and imagination.</p>
+            <p>Join us in celebrating the magic of Barbie and the countless dreams she has inspired for over 60 years.</p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Barbie Collection</h3>
+                <p>Discover the most exclusive Barbie dolls and accessories from around the world.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="nav-link" data-tab="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-tab="collection">Collection</a></li>
+                    <li><a href="#" class="nav-link" data-tab="dolls">Dolls</a></li>
+                    <li><a href="#" class="nav-link" data-tab="accessories">Accessories</a></li>
+                    <li><a href="#" class="nav-link" data-tab="about">About</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="contactLink">Contact Us</a></li>
+                    <li><a href="#" id="shippingLink">Shipping Info</a></li>
+                    <li><a href="#" id="returnsLink">Returns</a></li>
+                    <li><a href="#" id="faqLink">FAQ</a></li>
+                    <li><a href="#" id="privacyLink">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on new collections and exclusive offers.</p>
+                <form id="newsletterForm">
+                    <input type="email" placeholder="Your email address" required style="padding: 10px; width: 100%; border-radius: 5px; border: none; margin-top: 10px;">
+                    <button type="submit" class="btn" style="margin-top: 10px; width: 100%;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Barbie Collection. All rights reserved. Barbie and associated trademarks are owned by Mattel, Inc.</p>
+        </div>
+    </footer>
+    
+    <!-- Modal -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 id="modalTitle">Information</h2>
+            <p id="modalMessage">This is a sample modal message.</p>
+            <button class="btn" id="modalCloseBtn">Close</button>
+        </div>
+    </div>
+    
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get filter value
+                const filterValue = button.getAttribute('data-filter');
+                
+                // Filter collection items
+                document.querySelectorAll('.collection-item').forEach(item => {
+                    if (filterValue === 'all') {
+                        item.classList.remove('hidden');
+                    } else {
+                        if (item.getAttribute('data-category').includes(filterValue)) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Collection item hover effects
+        document.querySelectorAll('.collection-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Navigation functionality
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tab = link.getAttribute('data-tab');
+                
+                // Show appropriate content based on tab
+                if (tab === 'collection') {
+                    document.querySelector('.collection-section').scrollIntoView({ behavior: 'smooth' });
+                } else if (tab === 'about') {
+                    document.querySelector('.about-section').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // For other tabs, show a modal
+                    showModal(
+                        `${tab.charAt(0).toUpperCase() + tab.slice(1)} Section`,
+                        `This would be the ${tab} section content. In a full website, this would navigate to a dedicated page.`
+                    );
+                }
+            });
+        });
+        
+        // View Collection button
+        document.getElementById('viewCollectionBtn').addEventListener('click', () => {
+            document.querySelector('.collection-section').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Modal functionality
+        const modal = document.getElementById('infoModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        
+        function showModal(title, message) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            modal.style.display = 'flex';
+        }
+        
+        function hideModal() {
+            modal.style.display = 'none';
+        }
+        
+        closeModal.addEventListener('click', hideModal);
+        modalCloseBtn.addEventListener('click', hideModal);
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideModal();
+            }
+        });
+        
+        // Footer link functionality
+        document.getElementById('contactLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal('Contact Us', 'You can reach us at contact@barbiecollection.com or call 1-800-BARBIE.');
+        });
+        
+        document.getElementById('shippingLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal('Shipping Information', 'We offer free shipping on orders over $50. Standard delivery takes 5-7 business days.');
+        });
+        
+        document.getElementById('returnsLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal('Returns Policy', 'We accept returns within 30 days of purchase. Items must be in original condition.');
+        });
+        
+        document.getElementById('faqLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal('Frequently Asked Questions', 'Check our website for a complete FAQ section or contact our customer service team.');
+        });
+        
+        document.getElementById('privacyLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal('Privacy Policy', 'We value your privacy. Our policy outlines how we collect, use, and protect your personal information.');
+        });
+        
+        // Newsletter form
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            showModal('Newsletter Subscription', `Thank you for subscribing with ${email}! You'll receive our latest updates soon.`);
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
